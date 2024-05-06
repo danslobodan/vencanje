@@ -51,8 +51,8 @@ export const AttendanceForm = () => {
     };
 
     return (
-        <div>
-            <div className='text-6xl my-10'>POTVRDA DOLASKA</div>
+        <div className='tracking-widest'>
+            <div className='text-6xl my-10 text-center'>POTVRDA DOLASKA</div>
             <form
                 className='flex flex-col gap-y-4'
                 onSubmit={(e) => {
@@ -118,13 +118,13 @@ export const AttendanceForm = () => {
                 ))}
                 <button
                     onClick={addGuest}
-                    className='border border-amber-500 self-center p-2 self-start'
+                    className='border border-amber-500 self-center p-2'
                     type='button'
                 >
-                    +
+                    + DODAJ
                 </button>
                 <button
-                    className='border border-amber-500 self-center p-2 self-start'
+                    className='border border-amber-500 self-center p-2'
                     type='submit'
                 >
                     POTVRDI

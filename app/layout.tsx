@@ -1,14 +1,17 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Bojana i Sloba',
     description: 'Venčanje Bojane i Slobodana',
+};
+
+export const viewport: Viewport = {
+    initialScale: 1,
+    width: 'device-width',
 };
 
 export default function RootLayout({
