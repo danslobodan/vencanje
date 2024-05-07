@@ -13,8 +13,12 @@ export const AttendanceForm = () => {
     const [name, setName] = useState('');
     const [guests, setGuests] = useState<Guest[]>([]);
 
-    const addGuest = () => {
+    const addAdult = () => {
         setGuests([...guests, { name: '', type: 'Odrasli' }]);
+    };
+
+    const addChild = () => {
+        setGuests([...guests, { name: '', type: 'Dete', age: 1 }]);
     };
 
     const handleGuestChange = (
@@ -62,36 +66,44 @@ export const AttendanceForm = () => {
             >
                 <label>IME I PREZIME</label>
                 <input
+                    required
                     onChange={(e) => setName(e.target.value)}
                     className='border border-amber-500 bg-emerald-900 p-2'
                     type='text'
                 />
-                <label>IMENA I PREZIMENA GOSTIJU KOJI DOLAZE SA MNOM...</label>
+                <label>GOSTI KOJI DOLAZE SA MNOM...</label>
                 {guests.map((guest, index) => (
-                    <div key={index} className='flex gap-x-2 items-center'>
-                        <input
-                            value={guest.name}
-                            onChange={(e) =>
-                                handleGuestChange(index, 'name', e.target.value)
-                            }
-                            className='border border-amber-500 bg-emerald-900 p-2'
-                            placeholder='IME I PREZIME'
-                            type='text'
-                        />
-                        <select
-                            value={guest.type}
-                            onChange={(e) =>
-                                handleGuestChange(
-                                    index,
-                                    'type',
-                                    e.target.value as 'Dete' | 'Odrasli'
-                                )
-                            }
-                            className='border border-amber-500 bg-emerald-900 p-2'
-                        >
-                            <option value='Odrasli'>Odrasli</option>
-                            <option value='Dete'>Dete</option>
-                        </select>
+                    <div
+                        key={index}
+                        className='flex flex-col md:flex-row gap-y-2 gap-x-2'
+                    >
+                        <div className='flex'>
+                            <input
+                                required
+                                id={index.toString()}
+                                value={guest.name}
+                                onChange={(e) =>
+                                    handleGuestChange(
+                                        index,
+                                        'name',
+                                        e.target.value
+                                    )
+                                }
+                                placeholder='IME I PREZIME'
+                                className='border border-amber-500 bg-emerald-900 p-2 flex-1'
+                                type='text'
+                            />
+                            <button
+                                className='border border-amber-500 self-center p-2 px-4 bg-emerald-950'
+                                onClick={(_) => {
+                                    setGuests(
+                                        guests.filter((_, i) => i !== index)
+                                    );
+                                }}
+                            >
+                                -
+                            </button>
+                        </div>
                         {guest.type === 'Dete' && (
                             <>
                                 <select
@@ -107,28 +119,38 @@ export const AttendanceForm = () => {
                                 >
                                     {years.map((year) => (
                                         <option key={year} value={year}>
-                                            {year}
+                                            {year} god.
                                         </option>
                                     ))}
                                 </select>
-                                <div>GOD.</div>
                             </>
                         )}
                     </div>
                 ))}
-                <button
-                    onClick={addGuest}
-                    className='border border-amber-500 self-center p-2'
-                    type='button'
-                >
-                    + DODAJ
-                </button>
-                <button
-                    className='border border-amber-500 self-center p-2'
-                    type='submit'
-                >
-                    POTVRDI
-                </button>
+                <div className='flex gap-x-2 items-center justify-center'>
+                    <button
+                        onClick={addAdult}
+                        className='border border-amber-500 self-center p-2 bg-emerald-950 whitespace-nowrap'
+                        type='button'
+                    >
+                        + ODRASLI
+                    </button>
+                    <button
+                        onClick={addChild}
+                        className='border border-amber-500 self-center p-2 bg-emerald-950 whitespace-nowrap'
+                        type='button'
+                    >
+                        + DECA
+                    </button>
+                </div>
+                <div className='flex justify-end'>
+                    <button
+                        className='border border-amber-500 self-center p-2 bg-emerald-950'
+                        type='submit'
+                    >
+                        POTVRDI
+                    </button>
+                </div>
             </form>
         </div>
     );
