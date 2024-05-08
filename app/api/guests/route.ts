@@ -6,8 +6,8 @@ export async function GET() {
     try {
         const client = await clientPromise;
         const db = client.db('vencanje');
-        const movies = await db.collection('gosti').find({}).toArray();
-        return new NextResponse(JSON.stringify(movies));
+        const guests = await db.collection('gosti').find({}).toArray();
+        return new NextResponse(JSON.stringify(guests));
     } catch (e) {
         console.error(e);
         return new NextResponse('Internal Server Error', { status: 500 });

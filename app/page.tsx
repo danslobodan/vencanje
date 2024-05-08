@@ -24,8 +24,8 @@ const Announcement = () => {
         <div className='flex flex-col gap-y-6 text-center items-center'>
             <Image
                 className='w-full h-auto rounded-lg'
-                width={3264}
-                height={1592}
+                width={1600}
+                height={1198}
                 alt='Bojana i Sloba u Rimu'
                 src='/rim.jpg'
             />

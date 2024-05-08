@@ -9,6 +9,10 @@ interface Guest {
 
 const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
+const inputClass = 'border border-amber-500 bg-emerald-900 p-2';
+const buttonClass =
+    'border border-amber-500 p-2 bg-emerald-950 whitespace-nowrap';
+
 export const AttendanceForm = () => {
     const [name, setName] = useState('');
     const [guests, setGuests] = useState<Guest[]>([]);
@@ -68,7 +72,7 @@ export const AttendanceForm = () => {
                 <input
                     required
                     onChange={(e) => setName(e.target.value)}
-                    className='border border-amber-500 bg-emerald-900 p-2'
+                    className={inputClass}
                     type='text'
                 />
                 <label>GOSTI KOJI DOLAZE SA MNOM...</label>
@@ -89,12 +93,11 @@ export const AttendanceForm = () => {
                                         e.target.value
                                     )
                                 }
-                                placeholder='IME I PREZIME'
-                                className='border border-amber-500 bg-emerald-900 p-2 flex-1'
+                                className={inputClass}
                                 type='text'
                             />
                             <button
-                                className='border border-amber-500 self-center p-2 px-4 bg-emerald-950'
+                                className={`${buttonClass} px-4`}
                                 onClick={(_) => {
                                     setGuests(
                                         guests.filter((_, i) => i !== index)
@@ -115,7 +118,7 @@ export const AttendanceForm = () => {
                                             e.target.value
                                         )
                                     }
-                                    className='border border-amber-500 bg-emerald-900 p-2'
+                                    className={inputClass}
                                 >
                                     {years.map((year) => (
                                         <option key={year} value={year}>
@@ -130,24 +133,21 @@ export const AttendanceForm = () => {
                 <div className='flex gap-x-2 items-center justify-center'>
                     <button
                         onClick={addAdult}
-                        className='border border-amber-500 self-center p-2 bg-emerald-950 whitespace-nowrap'
+                        className={buttonClass}
                         type='button'
                     >
                         + ODRASLI
                     </button>
                     <button
                         onClick={addChild}
-                        className='border border-amber-500 self-center p-2 bg-emerald-950 whitespace-nowrap'
+                        className={buttonClass}
                         type='button'
                     >
                         + DECA
                     </button>
                 </div>
                 <div className='flex justify-end'>
-                    <button
-                        className='border border-amber-500 self-center p-2 bg-emerald-950'
-                        type='submit'
-                    >
+                    <button className={buttonClass} type='submit'>
                         POTVRDI
                     </button>
                 </div>
