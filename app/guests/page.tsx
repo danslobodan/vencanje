@@ -12,7 +12,9 @@ interface GetGuestsResponse {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default async function Page() {
-    const response = await fetch(`${BASE_URL}/api/guests`);
+    const response = await fetch(`${BASE_URL}/api/guests`, {
+        cache: 'no-store',
+    });
     const guests: GetGuestsResponse[] = await response.json();
 
     return (
