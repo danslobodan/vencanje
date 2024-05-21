@@ -9,7 +9,7 @@ interface Guest {
 
 const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
-const inputClass = 'border border-amber-500 bg-emerald-900 p-2';
+const inputClass = 'border border-amber-500 bg-emerald-900 p-2 w-full';
 const buttonClass =
     'border border-amber-500 p-2 bg-emerald-950 whitespace-nowrap';
 
