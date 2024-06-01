@@ -17,6 +17,7 @@ export const AttendanceForm = () => {
     const [name, setName] = useState('');
     const [guests, setGuests] = useState<Guest[]>([]);
     const [submitted, setSubmitted] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
 
     const addAdult = () => {
@@ -42,6 +43,7 @@ export const AttendanceForm = () => {
 
     const onSubmit = async () => {
         try {
+            setSubmitted(true);
             const response = await fetch('/api/guests', {
                 method: 'POST',
                 body: JSON.stringify({ name, guests }),
@@ -51,7 +53,7 @@ export const AttendanceForm = () => {
             });
 
             if (response.ok) {
-                setSubmitted(true);
+                setSuccess(true);
                 console.log('Success');
             } else {
                 setError(
@@ -63,7 +65,9 @@ export const AttendanceForm = () => {
         }
     };
 
-    if (submitted) return <div>Hvala na potvrdi dolaska!</div>;
+    if (success) return <div>Hvala na potvrdi dolaska!</div>;
+
+    if (submitted && !error) return <div>Prijava poslata...</div>;
 
     return (
         <div className='tracking-widest'>
