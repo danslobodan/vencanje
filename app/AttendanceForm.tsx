@@ -16,6 +16,8 @@ const buttonClass =
 export const AttendanceForm = () => {
     const [name, setName] = useState('');
     const [guests, setGuests] = useState<Guest[]>([]);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
 
     const addAdult = () => {
         setGuests([...guests, { name: '', type: 'Odrasli' }]);
@@ -49,18 +51,24 @@ export const AttendanceForm = () => {
             });
 
             if (response.ok) {
-                alert('Hvala na potvrdi dolaska!');
+                setSubmitted(true);
+                console.log('Success');
             } else {
-                alert('Došlo je do greške, pokušajte ponovo.');
+                setError(
+                    'Greška prilikom slanja podataka. Molim vas pokušajte ponovo. Ako se problem nastavi, kontaktirajte nas.'
+                );
             }
         } catch (error) {
             console.error(error);
         }
     };
 
+    if (submitted) return <div>Hvala na potvrdi dolaska!</div>;
+
     return (
         <div className='tracking-widest'>
             <div className='text-6xl my-10 text-center'>POTVRDA DOLASKA</div>
+            {error && <div className='text-red-500 my-4'>{error}</div>}
             <form
                 className='flex flex-col gap-y-4'
                 onSubmit={(e) => {
