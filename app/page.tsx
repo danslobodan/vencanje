@@ -38,7 +38,7 @@ const Announcement = () => {
                 <div>POZIVAMO VAS DA PRISUSTVUJETE NAŠEM VENČANJU</div>
                 <div>KOJE ĆE SE ODRŽATI U SUBOTU</div>
             </div>
-            <div className='text-6xl'>17. AVGUST 2024.</div>
+            <div className='text-6xl'>17. AVGUSTA 2024.</div>
         </div>
     );
 };
