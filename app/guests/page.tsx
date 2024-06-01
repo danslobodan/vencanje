@@ -39,9 +39,42 @@ export default async function Page() {
         return [...acc, group];
     }, [] as JSX.Element[]);
 
+    const { children0to5, children6to10, adults } = guests.reduce(
+        (acc, { name, guests }) => {
+            const children0to5 = guests.filter(
+                (guest) => guest.type === 'Dete' && guest.age! < 6
+            ).length;
+            const children6to10 = guests.filter(
+                (guest) =>
+                    guest.type === 'Dete' && guest.age! >= 6 && guest.age! < 11
+            ).length;
+            const childrenAbove10 = guests.filter(
+                (guest) => guest.type === 'Dete' && guest.age! >= 11
+            ).length;
+
+            const adults = guests.filter(
+                (guest) => guest.type === 'Odrasli'
+            ).length;
+
+            return {
+                children0to5: acc.children0to5 + children0to5,
+                children6to10: acc.children6to10 + children6to10,
+                adults: acc.adults + adults + childrenAbove10 + 1,
+            };
+        },
+        { children0to5: 0, children6to10: 0, adults: 0 }
+    );
+
     return (
         <main className='flex justify-center font-serif text-2xl text-amber-300 px-4 my-8'>
-            <div className='flex flex-col gap-y-6'>{guestGroups}</div>
+            <div className='flex flex-col gap-y-6'>
+                <div>
+                    <div>Odrasli: {adults}</div>
+                    <div>Deca 6 do 10 godina: {children6to10}</div>
+                    <div>Deca do 5 godina: {children0to5}</div>
+                </div>
+                <div className='flex flex-col gap-y-6'>{guestGroups}</div>
+            </div>
         </main>
     );
 }
